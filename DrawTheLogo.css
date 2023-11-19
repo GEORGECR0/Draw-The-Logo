@@ -1,0 +1,85 @@
+.main-screen{
+  background-color: rgb(240, 240, 240);
+  margin: auto;
+  height: 100vh;
+0
+}
+
+
+
+
+.center-screen {
+  background-color: white;
+    margin: auto;
+    width: 1810px;
+    height: 1890px;
+    padding: 10px;
+  }
+
+
+.title {
+  font-family: cursive ;
+  font-size: 70px ;
+  font-weight: bold ;
+  text-align:center ;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}     
+ .logo {
+  width:200px ;
+
+
+}
+.canvas {
+  width : 880px;
+  height:880px;
+  margin-top:10px;
+background-color: white;
+float: left;
+border-color:black;
+border-style: solid;
+border-radius: 30px;
+
+
+
+}
+.image-holder {
+  width:880px;
+  height:880px;
+  margin-top: 10px;
+background-color: white;
+float:right;
+border-color: black;
+border-style: solid;
+border-radius: 30px;
+
+
+}
+.done-button {
+  background-color: white;
+  color: rgb(77, 2, 77);
+  border-color: rgb(77, 2, 77);
+  border-style:solid;
+  border-width: 5px;
+  height: 80px;
+  width: 160px;
+border-radius: 50px;
+font-weight: bold ;
+font-size:20px ;
+cursor:pointer ;
+margin-top: 8px;
+transition: box-shadow 0.15s;
+transition: background-color 0.15s,
+color 0.15s ;
+}
+
+.done-button:active {
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15); 
+}
+
+.done-button:hover{
+  background-color: rgb(77, 2, 77);
+  color: white;
+}
+
