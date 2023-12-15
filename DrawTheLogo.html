@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Draw The Logo</title>
+    <link rel="stylesheet" href="DrawTheLogo.css">
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="main-screen">
+    <div id="center-screen">
+    <h1 id="title">Draw The Logo </h1>
+    <p id="system">Level: <span id="level">McDonald's</span></p>
+    <div id="canvas-container">
+        <canvas id="canvas" width="400" height="400"></canvas>
+        <div id="square"></div>
+    </div>
+    
+    <br>
+    <button id="start" onclick="startGame()">Start</button>
+    <button id="done">Done</button>
+    </div>
+</div>
+    
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        let drawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let currentLevel = 1;
+        const levelElement = document.getElementById("level");
+        levelElement.innerText = "McDonald's";
+        levelElement.style.fontWeight = "bold";
+
+        const levels = [
+            null,
+            { shape: "McDonald's", color: "rgb(255, 199, 44)", bgColor: "rgb(218, 41, 28)" },
+            { shape: "Nike", color: "rgb(255, 255, 255)", bgColor: "rgb(0, 0, 0)" },
+            { shape: "Apple", color: "rgb(0, 0, 0)", bgColor: "rgb(255, 255, 255)" },
+            { shape: "Android", color: "rgb(164, 198, 57)", bgColor: "rgb(255, 255, 255)" }, 
+            { shape: "YouTube", color: "rgb(255, 0, 0)", bgColor: "rgb(255, 255, 255)" },   
+            { shape: "NASA", color: "rgb(217, 41, 6)", bgColor: "rgb(255, 255, 255)" },  
+            { shape: "Spotify", color: "rgb(30, 215, 96)", bgColor: "rgb(25, 20, 20)" },   
+            { shape: "PlayStation", color: "rgb(0, 0, 0)", bgColor: "rgb(255, 255, 255)" },
+            { shape: "Xbox", color: "rgb(255, 255, 255)", bgColor: "rgb(16 ,124 ,16)" },
+            { shape: "Draw The Logo", color: "white", bgColor: "white" },
+        ];
+
+        let currentShape = levels[currentLevel];
+
+        canvas.addEventListener("mousedown", (e) => {
+            drawing = true;
+            lastX = e.clientX - canvas.offsetLeft;
+            lastY = e.clientY - canvas.offsetTop;
+        });
+
+        canvas.addEventListener("mousemove", draw);
+        canvas.addEventListener("mouseup", () => drawing = false);
+        canvas.addEventListener("mouseout", () => drawing = false);
+
+        document.getElementById("done").addEventListener("click", nextLevel);
+
+        function draw(e) {
+            if (!drawing) return;
+
+            ctx.strokeStyle = currentShape.color;
+            ctx.lineWidth = 15;
+            ctx.lineJoin = "round";
+            ctx.lineCap = "round";
+
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+            ctx.stroke();
+
+            lastX = e.clientX - canvas.offsetLeft;
+            lastY = e.clientY - canvas.offsetTop;
+        }
+
+        function clearCanvas() {
+            ctx.fillStyle = currentShape.bgColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function nextLevel() {
+            if (currentLevel < levels.length - 1) {
+                currentLevel++;
+                currentShape = levels[currentLevel];
+                levelElement.innerText = currentShape.shape; // Update the level name
+                clearCanvas();
+            } else {
+                levelElement.innerText = "Game Complete";
+            }
+        }
+
+        function startGame() {
+            const startButton = document.getElementById("start");
+            startButton.parentNode.removeChild(startButton);
+            currentLevel = 1;
+            currentShape = levels[currentLevel];
+            levelElement.innerText = "McDonald's";
+            clearCanvas();
+        }
+    </script>
+</body>
+</html>
